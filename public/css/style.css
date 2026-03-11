@@ -1,3 +1,22 @@
+*{
+    margin:0px
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(165, 223, 223);
+    color:rgb(237, 57, 84);
+    padding:10px
+}
+.header li{
+    display: inline-block;
+    padding: 5px;
+    font-size: 20px;
+}
+.footer{
+    background-color: rgb(212, 234, 236);
+    padding: 5px;
+}
 .row {
     display: flex;
     /* justify-content: space-around; */
