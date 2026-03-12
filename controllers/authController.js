@@ -5,15 +5,10 @@ const login = async (req, res) => {
 };
 const validateUser = async (req, res) => {
   const { email, password } = req.body;
-  const user = await userModel.findOne({ email, role: "admin" });
-  if (user) {
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (isMatch) {
-      req.session.user = user;
-      res.redirect("/");
-    } else {
-      res.redirect("/auth/login");
-    }
+  const user = await userModel.findOne({ email });          // ← no role filter
+  if (user && await bcrypt.compare(password, user.password)) {
+    req.session.user = user;
+    res.redirect("/");
   } else {
     res.redirect("/auth/login");
   }
@@ -23,10 +18,9 @@ const register = async (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-  const body = req.body;
-  const hashedPassword = await bcrypt.hash(body.password, 10);
-  body.password = hashedPassword;
-  await userModel.create(body);
+  const { name, email, password, role } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  await userModel.create({ name, email, password: hashedPassword, role });
   res.redirect("/auth/login");
 };
 

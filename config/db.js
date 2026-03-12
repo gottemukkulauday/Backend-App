@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+/*import mongoose from "mongoose";
 const dbConnect = async () => {
   try {
     if (!process.env.MONGO_URI) {
@@ -9,6 +9,15 @@ const dbConnect = async () => {
   } catch (err) {
     console.log(err);
     throw err;
+  }
+};
+export default dbConnect;*/
+import mongoose from "mongoose";
+const dbConnect = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+  } catch (err) {
+    console.log(err);
   }
 };
 export default dbConnect;
