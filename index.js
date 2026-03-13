@@ -46,7 +46,7 @@ app.use("/users", authenticateAdmin, userRouter);
 
 const startServer = async () => {
   await dbConnect();
-  app.listen(5000, () => {
+  app.listen(8080, () => {
     console.log("Server Started");
   });
 };
